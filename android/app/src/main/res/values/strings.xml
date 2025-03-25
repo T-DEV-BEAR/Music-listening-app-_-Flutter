@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">auth spotify</string>
+    <string name="facebook_app_id">1978294446020813</string>
+    <string name="fb_login_protocol_scheme">fb1978294446020813</string>
+    <string name="facebook_client_token">b48e05922a0a194296371c2a16795e50</string>
+</resources>
