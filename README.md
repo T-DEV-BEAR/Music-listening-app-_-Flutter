@@ -1,4 +1,4 @@
-# Phan Thien Son - Le Quoc Thinh
+# App Music
 # spotify
 
 A new Flutter project.
