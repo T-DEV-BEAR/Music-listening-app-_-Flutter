@@ -14,14 +14,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "993406920368-ftrhn2m2re4c98o4d13koriamaqcleq0.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.spotify",
-            "certificate_hash": "2cc88876aae66ddebdcfa86b36b15008a33e6f43"
-          }
-        },
-        {
           "client_id": "993406920368-97c5f8bb6d9dr605jsrh2amhqlrphctb.apps.googleusercontent.com",
           "client_type": 3
         }

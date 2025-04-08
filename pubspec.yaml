@@ -57,6 +57,10 @@ dependencies:
   speech_to_text:
   avatar_glow:
 
+  mockito:
+  firebase_auth_mocks:
+  build_runner:
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
