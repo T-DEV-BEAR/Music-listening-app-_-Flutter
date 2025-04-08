@@ -1,4 +1,3 @@
-# Phan Thien Son - Le Quoc Thinh
 # spotify
 
 A new Flutter project.
