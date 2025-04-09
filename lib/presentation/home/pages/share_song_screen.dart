@@ -48,7 +48,7 @@ class ShareSongScreen extends StatelessWidget {
 class _SongInfo extends StatelessWidget {
   final String albumId;
 
-  const _SongInfo({Key? key, required this.albumId}) : super(key: key);
+  const _SongInfo({required this.albumId});
 
   @override
   Widget build(BuildContext context) {

@@ -23,13 +23,15 @@ class SignIn extends StatefulWidget {
   final List<PodcastEntity> podcasts;
   final List<AlbumEntity> albums;
 
-  const SignIn(
-      {super.key,
-      required this.songs,
-      required this.currentIndex,
-      required this.artists,
-      required this.podcasts,
-      required this.albums});
+  const SignIn({
+    super.key,
+    required this.songs,
+    required this.currentIndex,
+    required this.artists,
+    required this.podcasts,
+    required this.albums,
+  });
+
   @override
   _SignInState createState() => _SignInState();
 }
@@ -45,13 +47,13 @@ class _SignInState extends State<SignIn> {
     if (EmailValidator.validate(_email.text)) {
       setState(() {
         _checkEmailButtonColor = Colors.green;
-        _errorMessage = ''; // Xóa thông báo lỗi nếu có
+        _errorMessage = '';
       });
     } else {
       setState(() {
-        _checkEmailButtonColor = Colors.grey; // Màu xám nếu email không hợp lệ
+        _checkEmailButtonColor = Colors.grey;
         _errorMessage =
-            'Định dạng email không hợp lệ. Vui lòng kiểm tra đầu vào của bạn.'; // Thông báo lỗi
+            'Định dạng email không hợp lệ. Vui lòng kiểm tra đầu vào của bạn.';
       });
     }
   }
@@ -78,54 +80,58 @@ class _SignInState extends State<SignIn> {
             _emailField(context),
             if (_errorMessage.isNotEmpty)
               Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(top: 8.0), // Sửa từ "custom" thành "top"
                 child: Text(
                   _errorMessage,
-                  style:const TextStyle(color: Colors.red),
+                  style: const TextStyle(color: Colors.red),
                 ),
               ),
             const SizedBox(height: 20),
             _passwordField(context),
             const SizedBox(height: 20),
             BasicAppButton(
+              key: const Key('sign_in_button'), // Thêm Key vào đây
               onPressed: () async {
-                var result = await sl<SigninUseCase>().call(
-                  params: SigninUserReq(
-                    email: _email.text,
-                    password: _password.text,
-                  ),
-                );
-                result.fold(
-                  (l) {
-                    var snackbar = SnackBar(
-                      content: Text(l),
-                      behavior: SnackBarBehavior.floating,
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(snackbar);
-                  },
-                  (r) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => BlocProvider(
-                          create: (context) {
-                            var cubit = GetArtistCubit();
-                            cubit.getArtists();
-                            return cubit;
-                          },
-                          child: ChooseArtistScreen(
-                            songs: widget.songs,
-                            currentIndex: widget.currentIndex,
-                            artists: widget.artists,
-                            podcasts: widget.podcasts,
-                            albums: widget.albums,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                );
-              },
+  print('🚀 Bắt đầu đăng nhập');
+  var result = await sl<SigninUseCase>().call(
+    params: SigninUserReq(
+      email: _email.text,
+      password: _password.text,
+    ),
+  );
+  result.fold(
+    (l) {
+      print('❌ Đăng nhập thất bại: $l');
+      var snackbar = SnackBar(
+        content: Text(l),
+        behavior: SnackBarBehavior.floating,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackbar);
+    },
+    (r) {
+      print('✅ Đăng nhập thành công → chuyển đến ChooseArtistScreen');
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) {
+              var cubit = GetArtistCubit();
+              cubit.getArtists();
+              return cubit;
+            },
+            child: ChooseArtistScreen(
+              songs: widget.songs,
+              currentIndex: widget.currentIndex,
+              artists: widget.artists,
+              podcasts: widget.podcasts,
+              albums: widget.albums,
+            ),
+          ),
+        ),
+      );
+    },
+  );
+},
               title: "Đăng Nhập",
             ),
           ],
@@ -147,13 +153,12 @@ class _SignInState extends State<SignIn> {
       controller: _email,
       decoration: InputDecoration(
         hintText: 'Nhập Email',
-        suffixIcon: Icon(Icons.check,
-            color: _checkEmailButtonColor), // Thay đổi màu dựa trên tính hợp lệ
+        suffixIcon: Icon(Icons.check, color: _checkEmailButtonColor),
       ).applyDefaults(
         Theme.of(context).inputDecorationTheme,
       ),
       onChanged: (value) {
-        _checkEmail(); // Kiểm tra email mỗi khi người dùng nhập
+        _checkEmail();
       },
     );
   }
