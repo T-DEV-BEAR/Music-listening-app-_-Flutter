@@ -494,13 +494,13 @@ class AddOptionsSection extends StatelessWidget {
   final List<AlbumEntity> albums;
 
   const AddOptionsSection({
-    super.key,
+    Key? key,
     required this.songs,
     required this.currentIndex,
     required this.artists,
     required this.podcasts,
     required this.albums,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
