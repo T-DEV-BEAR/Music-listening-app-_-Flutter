@@ -12,7 +12,8 @@ class AlbumControl extends StatefulWidget {
   final String albumId;
   final AlbumEntity album;
 
-  const AlbumControl({super.key, required this.albumId, required this.album});
+  const AlbumControl({Key? key, required this.albumId, required this.album})
+      : super(key: key);
 
   @override
   _AlbumControlState createState() => _AlbumControlState();
@@ -34,7 +35,6 @@ class _AlbumControlState extends State<AlbumControl> {
     });
   }
 
-  @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>

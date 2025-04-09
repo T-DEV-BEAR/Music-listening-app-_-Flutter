@@ -216,7 +216,7 @@ class _ChoosePodcastScreenState extends State<ChoosePodcastScreen> {
 class _SearchBox extends StatelessWidget {
   final Function(String) onSearch;
 
-  const _SearchBox({required this.onSearch});
+  const _SearchBox({super.key, required this.onSearch});
 
   @override
   Widget build(BuildContext context) {
